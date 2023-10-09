@@ -57,6 +57,9 @@ local servers = {
     -- clangd = {},
     gopls = {
         gofumpt = true,
+        usePlaceholders = true,
+        completeFunctionCalls = false,
+
     },
     -- pyright = {},
     -- rust_analyzer = {},

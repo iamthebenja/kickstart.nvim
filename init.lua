@@ -109,6 +109,32 @@ require('lazy').setup({
     },
   },
 
+  {
+    "stevearc/conform.nvim",
+    event = "BufWritePre", -- load the plugin before saving
+    keys = {
+      {
+        "<leader>f",
+        function() require("conform").format({ lsp_fallback = true }) end,
+        desc = "Format",
+      },
+    },
+    opts = {
+      formatters_by_ft = {
+        python = { "isort", "black" },
+        javascript = { { "prettierd", "prettier" } },
+        markdown = { "inject" },
+      },
+      -- enable format-on-save
+      format_on_save = {
+        -- when no formatter is setup for a filetype, fallback to formatting
+        -- via the LSP. This is relevant e.g. for taplo (toml LSP), where the
+        -- LSP can handle the formatting for us
+        lsp_fallback = true,
+      },
+    },
+  },
+
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
   {
@@ -224,7 +250,7 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  require 'kickstart.plugins.autoformat',
+  -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
